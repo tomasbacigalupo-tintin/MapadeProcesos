@@ -182,8 +182,8 @@
       <button onclick="goto('dashboard')" class="text-yellow-900 text-sm underline">Volver</button>
     </div>
     <div class="mb-2">
-      <progress id="detalle-barra" max="10" value="0" class="progress-bar w-full h-5 rounded-full"></progress>
-      <div class="flex justify-between text-xs text-yellow-700"><span>0</span><span>10</span></div>
+      <progress id="detalle-barra" max="1" value="0" class="progress-bar w-full h-5 rounded-full"></progress>
+      <div class="flex justify-between text-xs text-yellow-700"><span id="detalle-progreso">0</span><span id="detalle-total">0</span></div>
     </div>
     <div class="flex gap-1 border-b border-yellow-200 mb-2">
       <button id="tab-hitos" onclick="setTab('hitos')" class="serif font-bold text-yellow-900 border-b-2 border-yellow-900 px-2">Hitos</button>
@@ -282,8 +282,8 @@ function renderVirtudes(){
           <svg width="28" height="28" viewBox="0 0 80 80"><circle cx="40" cy="40" r="37" fill="#1a2337" stroke="#e6b800" stroke-width="3"/><polygon points="40,15 55,70 25,70" fill="#e6b800" /></svg>
           <span class="serif text-lg text-yellow-900 font-bold">${v.nombre}</span>
         </div>
-        <progress max="10" value="${v.progreso||0}" class="progress-bar w-full h-4"></progress>
-        <div class="flex justify-between text-xs text-yellow-700"><span>${v.progreso||0}</span><span>10</span></div>
+        <progress max="${v.hitos.length||1}" value="${v.progreso||0}" class="progress-bar w-full h-4"></progress>
+        <div class="flex justify-between text-xs text-yellow-700"><span>${v.progreso||0}</span><span>${v.hitos.length}</span></div>
         <button onclick="abrirDetalleVirtud('${v.nombre}')" class="text-yellow-900 underline font-semibold text-sm">Ver detalle</button>
       </div>
     `;
@@ -320,7 +320,11 @@ function renderDetalle(){
   const v = ESTADO.virtudes.find(v=>v.nombre===ESTADO.virtudActual);
   document.getElementById("detalle-nombre").textContent = v.nombre;
   document.getElementById("detalle-barra").value = v.progreso||0;
+  document.getElementById("detalle-barra").max = v.hitos.length || 1;
   setTab(ESTADO.tabDetalle,true);
+  document.getElementById("detalle-barra").value = v.progreso || 0;
+  document.getElementById("detalle-progreso").textContent = v.progreso || 0;
+  document.getElementById("detalle-total").textContent = v.hitos.length;
   const btn = document.getElementById("btn-eliminar-virtud");
   btn.style.display = ["Fe","Esperanza","Caridad"].includes(v.nombre) ? "none" : "";
 }
