@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Christus Vincit</title>
+  <!-- Serif para títulos, Sans para textos -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(120deg, #1a2337 0%, #24243e 100%);
+      min-height: 100vh;
+      font-family: 'Montserrat', sans-serif;
+    }
+    .serif {
+      font-family: 'Cormorant Garamond', serif;
+      letter-spacing: 0.5px;
+    }
+    .glow-gold { text-shadow: 0 2px 16px #e6b80077, 0 0 1px #fff; color: #e6b800; }
+    .btn-gold {
+      background: linear-gradient(90deg,#e6b800,#ffe47a);
+      color: #222; border: none;
+      font-weight: 700;
+      box-shadow: 0 2px 12px #e6b80033;
+      border-radius: 1.2rem;
+      transition: filter .15s;
+    }
+    .btn-gold:hover { filter: brightness(1.07); }
+    .card {
+      background: linear-gradient(102deg, #fffbe9 85%, #e7dbb6 100%);
+      border: 2px solid #e6b800;
+      border-radius: 1.2rem;
+      box-shadow: 0 2px 10px #1a23370d;
+    }
+    .progress-bar {
+      accent-color: #e6b800;
+      border-radius: 8px;
+    }
+    .decor-line {
+      width: 48px; height: 4px; background: linear-gradient(90deg,#e6b800,#fffbe9); border-radius: 2px; margin: 12px auto;
+    }
+  </style>
+</head>
+<body class="text-white">
+
+<!-- ======= 1. HOME / LANDING ======= -->
+<div id="pantalla-home" class="min-h-screen flex flex-col items-center justify-center px-4">
+  <div class="w-full max-w-md bg-white/10 rounded-3xl shadow-2xl p-8 flex flex-col items-center gap-6 border border-yellow-700 relative">
+    <!-- Escudo SVG ficticio -->
+    <div class="mt-1 mb-2">
+      <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+        <circle cx="40" cy="40" r="37" fill="#1a2337" stroke="#e6b800" stroke-width="4"/>
+        <polygon points="40,15 55,70 25,70" fill="#e6b800" />
+        <rect x="36" y="25" width="8" height="32" rx="3" fill="#fff" />
+        <rect x="28" y="43" width="24" height="7" rx="3" fill="#fff" />
+        <ellipse cx="40" cy="23" rx="8" ry="5" fill="#b32d2e" opacity="0.9"/>
+        <ellipse cx="40" cy="75" rx="12" ry="4" fill="#b32d2e" opacity="0.3"/>
+        <polygon points="40,5 46,18 34,18" fill="#e6b800" stroke="#fff" stroke-width="1"/>
+      </svg>
+    </div>
+    <!-- Lema -->
+    <div class="serif text-2xl md:text-3xl text-center glow-gold font-bold">
+      CHRISTUS VINCIT<br>
+      <span class="text-yellow-300">CHRISTUS REGNAT</span><br>
+      CHRISTUS IMPERAT
+    </div>
+    <div class="decor-line"></div>
+    <!-- Cruz central decorativa -->
+    <svg width="44" height="44" class="mb-1" viewBox="0 0 44 44" fill="none">
+      <rect x="19" y="4" width="6" height="36" rx="3" fill="#e6b800"/>
+      <rect y="19" width="44" height="6" rx="3" fill="#e6b800"/>
+      <rect x="19" y="0" width="6" height="44" rx="3" fill="#fff" fill-opacity="0.07"/>
+      <rect x="0" y="19" width="44" height="6" rx="3" fill="#fff" fill-opacity="0.07"/>
+    </svg>
+    <button onclick="goto('login')" class="btn-gold text-lg px-8 py-3 mt-1 mb-2 w-full">Comenzar mi camino de Caballero</button>
+    <p class="text-white/90 text-center text-base mb-2">
+      Forja tus virtudes, gana condecoraciones y vive el llamado del Rey de Reyes.  
+      <span class="serif text-yellow-200">“En este signo vencerás”</span>
+    </p>
+    <div class="absolute top-3 right-3 flex gap-2">
+      <button onclick="goto('login')" class="text-sm text-yellow-200 underline font-bold">Ingresar</button>
+      <button onclick="goto('register')" class="text-sm text-yellow-200 underline font-bold">Registrar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ======= 2. LOGIN / REGISTRO ======= -->
+<div id="pantalla-login" class="hidden min-h-screen flex flex-col items-center justify-center px-4">
+  <div class="w-full max-w-md card p-8 flex flex-col gap-6">
+    <div class="flex items-center gap-2">
+      <svg width="38" height="38" viewBox="0 0 80 80"><circle cx="40" cy="40" r="37" fill="#1a2337" stroke="#e6b800" stroke-width="4"/><polygon points="40,15 55,70 25,70" fill="#e6b800" /></svg>
+      <span class="serif text-xl text-yellow-900 font-bold">Ingresa como Caballero</span>
+    </div>
+    <form onsubmit="login(event)" class="flex flex-col gap-3">
+      <label for="mail" class="serif font-semibold text-yellow-900">Correo electrónico</label>
+      <input id="mail" type="email" required class="rounded-xl p-3 border border-yellow-400 text-black" autocomplete="email"/>
+      <label for="pass" class="serif font-semibold text-yellow-900">Contraseña</label>
+      <input id="pass" type="password" required class="rounded-xl p-3 border border-yellow-400 text-black" autocomplete="current-password"/>
+      <button type="submit" class="btn-gold text-lg px-5 py-2 mt-3">Ingresar</button>
+    </form>
+    <div class="text-center text-yellow-900 text-sm mt-2">
+      ¿No tienes cuenta?
+      <button onclick="goto('register')" class="text-yellow-600 underline font-bold">Únete a la Orden</button>
+    </div>
+    <div class="decor-line"></div>
+    <div class="flex flex-row justify-center gap-2 mt-1">
+      <button class="bg-white/80 rounded-full p-2" title="Google"><img src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png" alt="Google" class="w-6 h-6"></button>
+      <button class="bg-white/80 rounded-full p-2" title="Apple"><img src="https://cdn-icons-png.flaticon.com/512/0/747.png" alt="Apple" class="w-6 h-6"></button>
+    </div>
+  </div>
+</div>
+<div id="pantalla-register" class="hidden min-h-screen flex flex-col items-center justify-center px-4">
+  <div class="w-full max-w-md card p-8 flex flex-col gap-6">
+    <div class="flex items-center gap-2">
+      <svg width="38" height="38" viewBox="0 0 80 80"><circle cx="40" cy="40" r="37" fill="#1a2337" stroke="#e6b800" stroke-width="4"/><polygon points="40,15 55,70 25,70" fill="#e6b800" /></svg>
+      <span class="serif text-xl text-yellow-900 font-bold">Únete a la Orden</span>
+    </div>
+    <form onsubmit="register(event)" class="flex flex-col gap-3">
+      <label for="mailreg" class="serif font-semibold text-yellow-900">Correo electrónico</label>
+      <input id="mailreg" type="email" required class="rounded-xl p-3 border border-yellow-400 text-black" autocomplete="email"/>
+      <label for="passreg" class="serif font-semibold text-yellow-900">Contraseña</label>
+      <input id="passreg" type="password" required class="rounded-xl p-3 border border-yellow-400 text-black" autocomplete="new-password"/>
+      <button type="submit" class="btn-gold text-lg px-5 py-2 mt-3">Registrar</button>
+    </form>
+    <div class="text-center text-yellow-900 text-sm mt-2">
+      ¿Ya tienes cuenta?
+      <button onclick="goto('login')" class="text-yellow-600 underline font-bold">Ingresar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ======= 3. DASHBOARD ======= -->
+<div id="pantalla-dashboard" class="hidden min-h-screen flex flex-col items-center px-2 pt-6 pb-5">
+  <div class="w-full max-w-2xl">
+    <div class="flex items-center justify-between mb-2">
+      <div class="flex items-center gap-2">
+        <svg width="40" height="40" viewBox="0 0 80 80"><circle cx="40" cy="40" r="37" fill="#1a2337" stroke="#e6b800" stroke-width="4"/><polygon points="40,15 55,70 25,70" fill="#e6b800" /></svg>
+        <span class="serif text-xl text-yellow-100 font-bold">Bienvenido, Caballero</span>
+      </div>
+      <button onclick="goto('home')" class="text-yellow-200 text-sm underline">Salir</button>
+    </div>
+    <div class="serif text-2xl text-center text-yellow-400 font-bold mb-2">Tablero de Virtudes</div>
+    <div class="text-center text-yellow-200 italic mb-3">Viva Christus Rex!</div>
+    <div class="flex flex-row gap-2 mb-4">
+      <button onclick="abrirAgregarVirtud()" class="btn-gold px-3 py-1 text-base flex items-center gap-1">
+        <svg width="22" height="22" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#e6b800" stroke="#fff" stroke-width="1.2"/><path d="M12 7v10M7 12h10" stroke="#1a2337" stroke-width="2.5" stroke-linecap="round"/></svg>
+        Añadir virtud
+      </button>
+      <button onclick="goto('logros')" class="bg-yellow-200 text-yellow-900 font-bold px-3 py-1 rounded-full flex items-center gap-1 shadow-sm border border-yellow-300">
+        <svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="9" fill="#e6b800" stroke="#fff" stroke-width="1"/><path d="M10 4v7l5 3" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Logros / Retos
+      </button>
+      <button onclick="share()" class="bg-yellow-100 text-yellow-900 px-3 py-1 rounded-full flex items-center gap-1 border border-yellow-300">
+        <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path d="M20 12h-8m0 0l3.5-3.5M12 12l3.5 3.5M4 4h16v16H4V4z" stroke="#e6b800" stroke-width="2"/></svg>
+        Compartir
+      </button>
+    </div>
+    <div id="virtudes-lista" class="grid grid-cols-1 md:grid-cols-2 gap-5"></div>
+  </div>
+</div>
+
+<!-- MODAL AGREGAR VIRTUD -->
+<div id="modal-virtud" class="hidden fixed inset-0 bg-black/40 z-50 flex items-center justify-center">
+  <div class="card w-full max-w-xs p-5 relative">
+    <button onclick="cerrarModalVirtud()" class="absolute top-2 right-3 text-2xl text-yellow-700">&times;</button>
+    <div class="serif text-lg text-yellow-900 font-bold mb-2">Nueva virtud</div>
+    <input id="input-nombre-virtud" type="text" maxlength="24" class="rounded-xl p-2 border border-yellow-500 w-full mb-2" placeholder="Ej: Fortaleza">
+    <button onclick="agregarVirtud()" class="btn-gold w-full py-2 text-base">Agregar</button>
+    <div id="msg-modal-virtud" class="text-red-600 text-sm mt-1"></div>
+  </div>
+</div>
+
+<!-- ======= 4. DETALLE DE VIRTUD ======= -->
+<div id="pantalla-detalle" class="hidden min-h-screen flex flex-col items-center px-3 pt-6 pb-4">
+  <div class="w-full max-w-lg card p-6">
+    <div class="flex items-center justify-between mb-1">
+      <div class="flex items-center gap-2">
+        <svg width="32" height="32" viewBox="0 0 80 80"><circle cx="40" cy="40" r="37" fill="#1a2337" stroke="#e6b800" stroke-width="4"/><polygon points="40,15 55,70 25,70" fill="#e6b800" /></svg>
+        <span id="detalle-nombre" class="serif text-xl text-yellow-900 font-bold"></span>
+      </div>
+      <button onclick="goto('dashboard')" class="text-yellow-900 text-sm underline">Volver</button>
+    </div>
+    <div class="mb-2">
+      <progress id="detalle-barra" max="10" value="0" class="progress-bar w-full h-5 rounded-full"></progress>
+      <div class="flex justify-between text-xs text-yellow-700"><span>0</span><span>10</span></div>
+    </div>
+    <div class="flex gap-1 border-b border-yellow-200 mb-2">
+      <button id="tab-hitos" onclick="setTab('hitos')" class="serif font-bold text-yellow-900 border-b-2 border-yellow-900 px-2">Hitos</button>
+      <button id="tab-retos" onclick="setTab('retos')" class="serif font-bold text-yellow-800 border-b-2 border-transparent px-2">Retos</button>
+      <button id="tab-tips" onclick="setTab('tips')" class="serif font-bold text-yellow-800 border-b-2 border-transparent px-2">Consejos</button>
+    </div>
+    <div id="detalle-tab-content"></div>
+    <button onclick="abrirAgregarHito()" class="btn-gold w-full mt-3 py-2">+ Añadir hito/reto</button>
+    <button id="btn-eliminar-virtud" onclick="eliminarVirtudActual()" class="mt-2 text-yellow-800 underline">Eliminar virtud</button>
+    <div class="mt-2 text-center text-yellow-900 text-xs italic">“En este signo vencerás”</div>
+  </div>
+</div>
+
+<!-- MODAL AGREGAR HITO/RETO -->
+<div id="modal-hito" class="hidden fixed inset-0 bg-black/40 z-50 flex items-center justify-center">
+  <div class="card w-full max-w-xs p-5 relative">
+    <button onclick="cerrarModalHito()" class="absolute top-2 right-3 text-2xl text-yellow-700">&times;</button>
+    <div class="serif text-lg text-yellow-900 font-bold mb-2">Nuevo hito/reto</div>
+    <input id="input-nombre-hito" type="text" maxlength="32" class="rounded-xl p-2 border border-yellow-500 w-full mb-2" placeholder="Ej: Ayudé a un amigo">
+    <button onclick="agregarHito()" class="btn-gold w-full py-2 text-base">Agregar</button>
+    <div id="msg-modal-hito" class="text-red-600 text-sm mt-1"></div>
+  </div>
+</div>
+
+<!-- ======= 5. LOGROS / RETOS ======= -->
+<div id="pantalla-logros" class="hidden min-h-screen flex flex-col items-center px-3 pt-6 pb-4">
+  <div class="w-full max-w-lg card p-6">
+    <div class="flex items-center gap-3 mb-3">
+      <button onclick="goto('dashboard')" class="text-yellow-900 text-sm underline">← Volver</button>
+      <div class="serif text-xl text-yellow-900 font-bold">Logros & Retos</div>
+    </div>
+    <div class="flex gap-1 border-b border-yellow-200 mb-2">
+      <button id="tab-logros" onclick="setTabLogros('logros')" class="serif font-bold text-yellow-900 border-b-2 border-yellow-900 px-2">Logros</button>
+      <button id="tab-retosL" onclick="setTabLogros('retos')" class="serif font-bold text-yellow-800 border-b-2 border-transparent px-2">Retos</button>
+    </div>
+    <div id="logros-tab-content"></div>
+    <button onclick="abrirAgregarLogroReto()" class="btn-gold w-full mt-3 py-2">+ Añadir reto/logro</button>
+  </div>
+</div>
+
+<!-- TOAST FEEDBACK -->
+<div id="toast" class="fixed bottom-8 left-1/2 -translate-x-1/2 bg-yellow-700 text-white rounded-xl px-6 py-3 text-lg shadow-xl opacity-0 pointer-events-none transition"></div>
+
+<!-- SCRIPTS SPA -->
+<script>
+/* === ESTADO PRINCIPAL === */
+const ESTADO = {
+  usuario: {nombre:"Católico", mail:"", log:false},
+  virtudes: [
+    {nombre:"Fe", progreso:3, hitos:[{nombre:"Fui a misa",completo:true}], retos:[{nombre:"Rezar el rosario"}], tips:["Confía en Dios en la dificultad."]},
+    {nombre:"Esperanza", progreso:2, hitos:[], retos:[], tips:["Lee las promesas de Cristo."]},
+    {nombre:"Caridad", progreso:1, hitos:[], retos:[], tips:["Haz una obra de misericordia."]},
+  ],
+  virtudActual: null,
+  tabDetalle: "hitos",
+  tabLogros: "logros",
+  logros: [{nombre:"7 días seguidos",desc:"Registra actividad 7 días",img:"🏅"}],
+  retos: [{nombre:"No quejarse en todo el día"}]
+};
+
+/* ==== NAVEGACIÓN ==== */
+function goto(pantalla) {
+  document.querySelectorAll("body > div:not(.fixed)").forEach(div=>div.classList.add("hidden"));
+  if(pantalla==='home') document.getElementById("pantalla-home").classList.remove("hidden");
+  if(pantalla==='login') document.getElementById("pantalla-login").classList.remove("hidden");
+  if(pantalla==='register') document.getElementById("pantalla-register").classList.remove("hidden");
+  if(pantalla==='dashboard'){ renderVirtudes(); document.getElementById("pantalla-dashboard").classList.remove("hidden"); }
+  if(pantalla==='detalle'){ renderDetalle(); document.getElementById("pantalla-detalle").classList.remove("hidden"); }
+  if(pantalla==='logros'){ renderLogros(); document.getElementById("pantalla-logros").classList.remove("hidden"); }
+}
+
+/* ==== LOGIN / REGISTER ==== */
+function login(e){
+  e.preventDefault();
+  ESTADO.usuario.mail=document.getElementById("mail").value;
+  ESTADO.usuario.log=true;
+  showToast("Bienvenido, Caballero.");
+  goto("dashboard");
+}
+function register(e){
+  e.preventDefault();
+  ESTADO.usuario.mail=document.getElementById("mailreg").value;
+  ESTADO.usuario.log=true;
+  showToast("Cuenta creada. ¡Sé virtuoso!");
+  goto("dashboard");
+}
+
+/* ==== DASHBOARD ==== */
+function renderVirtudes(){
+  const cont = document.getElementById("virtudes-lista");
+  cont.innerHTML = "";
+  ESTADO.virtudes.forEach((v,i)=>{
+    cont.innerHTML += `
+      <div class="card p-4 flex flex-col gap-2 relative">
+        <div class="flex items-center gap-2">
+          <svg width="28" height="28" viewBox="0 0 80 80"><circle cx="40" cy="40" r="37" fill="#1a2337" stroke="#e6b800" stroke-width="3"/><polygon points="40,15 55,70 25,70" fill="#e6b800" /></svg>
+          <span class="serif text-lg text-yellow-900 font-bold">${v.nombre}</span>
+        </div>
+        <progress max="10" value="${v.progreso||0}" class="progress-bar w-full h-4"></progress>
+        <div class="flex justify-between text-xs text-yellow-700"><span>${v.progreso||0}</span><span>10</span></div>
+        <button onclick="abrirDetalleVirtud('${v.nombre}')" class="text-yellow-900 underline font-semibold text-sm">Ver detalle</button>
+      </div>
+    `;
+  });
+}
+function abrirAgregarVirtud(){
+  document.getElementById("modal-virtud").classList.remove("hidden");
+  document.getElementById("input-nombre-virtud").value="";
+  document.getElementById("msg-modal-virtud").textContent="";
+}
+function cerrarModalVirtud(){
+  document.getElementById("modal-virtud").classList.add("hidden");
+}
+function agregarVirtud(){
+  let nombre = document.getElementById("input-nombre-virtud").value.trim();
+  if(!nombre){ document.getElementById("msg-modal-virtud").textContent="Ponle nombre a la virtud"; return; }
+  if(ESTADO.virtudes.find(v=>v.nombre.toLowerCase()===nombre.toLowerCase())){
+    document.getElementById("msg-modal-virtud").textContent="Ya tienes esa virtud";
+    return;
+  }
+  ESTADO.virtudes.push({nombre,progreso:0,hitos:[],retos:[],tips:[]});
+  cerrarModalVirtud();
+  showToast("Virtud agregada");
+  renderVirtudes();
+}
+
+/* ==== DETALLE DE VIRTUD ==== */
+function abrirDetalleVirtud(nombre){
+  ESTADO.virtudActual=nombre;
+  ESTADO.tabDetalle="hitos";
+  goto("detalle");
+}
+function renderDetalle(){
+  const v = ESTADO.virtudes.find(v=>v.nombre===ESTADO.virtudActual);
+  document.getElementById("detalle-nombre").textContent = v.nombre;
+  document.getElementById("detalle-barra").value = v.progreso||0;
+  setTab(ESTADO.tabDetalle,true);
+  const btn = document.getElementById("btn-eliminar-virtud");
+  btn.style.display = ["Fe","Esperanza","Caridad"].includes(v.nombre) ? "none" : "";
+}
+function setTab(tab,force){
+  if(!force && ESTADO.tabDetalle===tab) return;
+  ESTADO.tabDetalle=tab;
+  // Estilos de tabs
+  document.getElementById("tab-hitos").className = tab==='hitos' ? tabsA : tabsI;
+  document.getElementById("tab-retos").className = tab==='retos' ? tabsA : tabsI;
+  document.getElementById("tab-tips").className = tab==='tips' ? tabsA : tabsI;
+  const v = ESTADO.virtudes.find(v=>v.nombre===ESTADO.virtudActual);
+  let html="";
+  if(tab==="hitos"){
+    html = "<ul class='flex flex-col gap-2'>" + (v.hitos||[]).map((h,i)=>`
+      <li class="flex items-center gap-2">
+        <input type="checkbox" ${h.completo?'checked':''} onclick="marcarHito('${v.nombre}',${i},this.checked)">
+        <span class="${h.completo?'line-through text-yellow-500':''}">${h.nombre}</span>
+        <button onclick="eliminarHito('${v.nombre}',${i})" class="text-xs text-yellow-900 underline ml-2">Eliminar</button>
+      </li>
+    `).join("") + "</ul>";
+    if(!(v.hitos||[]).length) html += "<div class='text-xs text-yellow-800 mt-2'>Aún no tienes hitos</div>";
+  } else if(tab==="retos"){
+    html = "<ul class='flex flex-col gap-2'>" + (v.retos||[]).map((r,i)=>`
+      <li class="flex items-center gap-2">
+        <span>⚔️</span>
+        <span>${r.nombre}</span>
+        <button onclick="eliminarRetoVirtud('${v.nombre}',${i})" class="text-xs text-yellow-900 underline ml-2">Eliminar</button>
+      </li>
+    `).join("") + "</ul>";
+    if(!(v.retos||[]).length) html += "<div class='text-xs text-yellow-800 mt-2'>Aún no tienes retos</div>";
+  } else if(tab==="tips"){
+    html = "<ul class='flex flex-col gap-2'>" + (v.tips||[]).map(t=>`
+      <li class="flex items-center gap-2"><span>💡</span><span>${t}</span></li>
+    `).join("") + "</ul>";
+    if(!(v.tips||[]).length) html += "<div class='text-xs text-yellow-800 mt-2'>Aún no hay consejos</div>";
+  }
+  document.getElementById("detalle-tab-content").innerHTML = html;
+}
+function marcarHito(nombre,i,checked){
+  const v = ESTADO.virtudes.find(v=>v.nombre===nombre);
+  v.hitos[i].completo=checked;
+  v.progreso = (v.hitos.filter(h=>h.completo).length);
+  renderDetalle();
+}
+function abrirAgregarHito(){
+  document.getElementById("modal-hito").classList.remove("hidden");
+  document.getElementById("input-nombre-hito").value="";
+  document.getElementById("msg-modal-hito").textContent="";
+}
+function cerrarModalHito(){
+  document.getElementById("modal-hito").classList.add("hidden");
+}
+function agregarHito(){
+  let nombre = document.getElementById("input-nombre-hito").value.trim();
+  if(!nombre){ document.getElementById("msg-modal-hito").textContent="Ponle nombre al hito"; return; }
+  const v = ESTADO.virtudes.find(v=>v.nombre===ESTADO.virtudActual);
+  if(ESTADO.tabDetalle==="hitos"){
+    if(v.hitos.find(h=>h.nombre.toLowerCase()===nombre.toLowerCase())){ document.getElementById("msg-modal-hito").textContent="Hito ya existe"; return; }
+    v.hitos.push({nombre,completo:false});
+    showToast("Hito agregado");
+  }else if(ESTADO.tabDetalle==="retos"){
+    if(v.retos.find(r=>r.nombre.toLowerCase()===nombre.toLowerCase())){ document.getElementById("msg-modal-hito").textContent="Reto ya existe"; return; }
+    v.retos.push({nombre});
+    showToast("Reto agregado");
+  }
+  cerrarModalHito();
+  renderDetalle();
+}
+function eliminarHito(nombre,i){
+  const v = ESTADO.virtudes.find(v=>v.nombre===nombre);
+  v.hitos.splice(i,1);
+  v.progreso = (v.hitos.filter(h=>h.completo).length);
+  renderDetalle();
+}
+function eliminarRetoVirtud(nombre,i){
+  const v = ESTADO.virtudes.find(v=>v.nombre===nombre);
+  v.retos.splice(i,1);
+  renderDetalle();
+}
+function eliminarVirtudActual(){
+  if(!confirm("¿Seguro que deseas eliminar esta virtud?")) return;
+  ESTADO.virtudes = ESTADO.virtudes.filter(v=>v.nombre!==ESTADO.virtudActual);
+  showToast("Virtud eliminada");
+  goto("dashboard");
+}
+const tabsA="serif font-bold text-yellow-900 border-b-2 border-yellow-900 px-2";
+const tabsI="serif font-bold text-yellow-800 border-b-2 border-transparent px-2";
+
+/* ==== LOGROS / RETOS ==== */
+function renderLogros(){
+  setTabLogros(ESTADO.tabLogros,true);
+}
+function setTabLogros(tab,force){
+  if(!force && ESTADO.tabLogros===tab) return;
+  ESTADO.tabLogros=tab;
+  document.getElementById("tab-logros").className = tab==='logros'?tabsA:tabsI;
+  document.getElementById("tab-retosL").className = tab==='retos'?tabsA:tabsI;
+  let html="";
+  if(tab==="logros"){
+    html = "<div class='grid grid-cols-2 gap-3'>" + (ESTADO.logros||[]).map(l=>`
+      <div class="flex flex-col items-center bg-yellow-50 rounded-xl shadow p-3">
+        <div class="text-3xl">${l.img||'🏅'}</div>
+        <div class="serif font-bold text-yellow-900">${l.nombre}</div>
+        <div class="text-xs text-yellow-700">${l.desc||""}</div>
+      </div>
+    `).join("") + "</div>";
+    if(!(ESTADO.logros||[]).length) html += "<div class='text-xs text-yellow-800 mt-2'>Sin logros aún</div>";
+  } else {
+    html = "<ul class='flex flex-col gap-2 mb-2'>" + (ESTADO.retos||[]).map((r,i)=>`
+      <li class="flex items-center gap-2">
+        <span>⚔️</span>
+        <span>${r.nombre}</span>
+        <button onclick="eliminarRetoGlobal(${i})" class="text-xs text-yellow-900 underline ml-2">Eliminar</button>
+      </li>
+    `).join("") + "</ul>";
+    if(!(ESTADO.retos||[]).length) html += "<div class='text-xs text-yellow-800 mt-2'>Sin retos aún</div>";
+  }
+  document.getElementById("logros-tab-content").innerHTML = html;
+}
+function abrirAgregarLogroReto(){
+  // Por simplicidad solo agrega a retos globales aquí
+  const nombre = prompt("Nombre del nuevo reto/logro:");
+  if(!nombre) return;
+  if(ESTADO.tabLogros==="logros"){
+    ESTADO.logros.push({nombre,img:"🏅"});
+    showToast("Logro agregado");
+    renderLogros();
+  }else{
+    ESTADO.retos.push({nombre});
+    showToast("Reto agregado");
+    renderLogros();
+  }
+}
+function eliminarRetoGlobal(i){
+  if(!confirm("¿Eliminar reto?")) return;
+  ESTADO.retos.splice(i,1);
+  renderLogros();
+}
+
+/* ==== FEEDBACK ==== */
+function showToast(msg){
+  const t=document.getElementById("toast");
+  t.textContent=msg; t.style.opacity=1;
+  t.classList.remove("opacity-0");
+  setTimeout(()=>{t.style.opacity=0;t.classList.add("opacity-0");},2200);
+}
+function share(){ showToast("¡Comparte tu camino de virtud!"); }
+
+/* ==== ARRANQUE ==== */
+goto("home");
+</script>
+
+</body>
+</html>
