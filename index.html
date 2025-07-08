@@ -5,44 +5,65 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>Christus Vincit</title>
   <!-- Serif para títulos, Sans para textos -->
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Cormorant+Garamond:wght@600&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css" rel="stylesheet">
   <style>
-    body {
-      background: linear-gradient(120deg, #1a2337 0%, #24243e 100%);
+    :root{
+      --navy:#1a2337;
+      --gold:#e6b800;
+      --white:#faf8ef;
+      --burgundy:#b32d2e;
+    }
+    body{
+      background-color: var(--navy);
+      /* TODO: agregar textura pergamino, por ahora degradado simple */
+      background-image: radial-gradient(circle at 50% 50%, #2a3550 0%, #1a2337 80%);
+      background-size: cover;
       min-height: 100vh;
       font-family: 'Montserrat', sans-serif;
+      color: var(--white);
     }
-    .serif {
-      font-family: 'Cormorant Garamond', serif;
+    .serif{
+      font-family: 'Cinzel','Cormorant Garamond', serif;
       letter-spacing: 0.5px;
     }
-    .glow-gold { text-shadow: 0 2px 16px #e6b80077, 0 0 1px #fff; color: #e6b800; }
-    .btn-gold {
-      background: linear-gradient(90deg,#e6b800,#ffe47a);
-      color: #222; border: none;
-      font-weight: 700;
-      box-shadow: 0 2px 12px #e6b80033;
-      border-radius: 1.2rem;
-      transition: filter .15s;
+    .glow-gold{ text-shadow: 0 2px 16px var(--gold)77, 0 0 1px #fff; color: var(--gold); }
+    .btn-gold{
+      background: linear-gradient(90deg,var(--gold),#ffe47a);
+      color:#222;border:none;
+      font-weight:700;
+      box-shadow:0 2px 12px var(--gold)33;
+      border-radius:1.2rem;
+      transition:filter .15s;
     }
-    .btn-gold:hover { filter: brightness(1.07); }
-    .card {
-      background: linear-gradient(102deg, #fffbe9 85%, #e7dbb6 100%);
-      border: 2px solid #e6b800;
-      border-radius: 1.2rem;
-      box-shadow: 0 2px 10px #1a23370d;
+    .btn-gold:hover{ filter: brightness(1.07); }
+    .card{
+      background: linear-gradient(102deg, var(--white) 85%, #e7dbb6 100%);
+      border:2px solid var(--gold);
+      border-radius:1.2rem;
+      box-shadow:0 2px 10px #1a23370d;
     }
-    .progress-bar {
-      accent-color: #e6b800;
-      border-radius: 8px;
+    .progress-bar{
+      accent-color: var(--gold);
+      border-radius:8px;
     }
-    .decor-line {
-      width: 48px; height: 4px; background: linear-gradient(90deg,#e6b800,#fffbe9); border-radius: 2px; margin: 12px auto;
+    .decor-line{
+      width:48px;height:4px;background:linear-gradient(90deg,var(--gold),var(--white));border-radius:2px;margin:12px auto;
     }
+    header{background:rgba(26,35,55,0.85);backdrop-filter:blur(4px);}
+    .fade-in{animation:fadeIn .6s ease-out;}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
   </style>
 </head>
 <body class="text-white">
+<header class="flex items-center justify-between fixed top-0 left-0 w-full px-4 py-2 shadow-md text-yellow-300 z-50 fade-in">
+  <svg class="h-10" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Caballeros de Colón">
+    <circle cx="32" cy="32" r="30" stroke="currentColor" stroke-width="4" fill="#1a2337" />
+    <path d="M32 12 L42 32 L32 52 L22 32 Z" fill="currentColor"/>
+    <rect x="29" y="24" width="6" height="16" fill="#1a2337"/>
+  </svg>
+  <div class="serif text-sm md:text-base hidden sm:block">Christus Vincit, Christus Regnat, Christus Imperat</div>
+</header>
 
 <!-- ======= 1. HOME / LANDING ======= -->
 <div id="pantalla-home" class="min-h-screen flex flex-col items-center justify-center px-4">
@@ -86,7 +107,7 @@
 </div>
 
 <!-- ======= 2. LOGIN / REGISTRO ======= -->
-<div id="pantalla-login" class="hidden min-h-screen flex flex-col items-center justify-center px-4">
+<div id="pantalla-login" class="hidden min-h-screen pt-20 flex flex-col items-center justify-center px-4">
   <div class="w-full max-w-md card p-8 flex flex-col gap-6">
     <div class="flex items-center gap-2">
       <svg width="38" height="38" viewBox="0 0 80 80"><circle cx="40" cy="40" r="37" fill="#1a2337" stroke="#e6b800" stroke-width="4"/><polygon points="40,15 55,70 25,70" fill="#e6b800" /></svg>
@@ -110,7 +131,7 @@
     </div>
   </div>
 </div>
-<div id="pantalla-register" class="hidden min-h-screen flex flex-col items-center justify-center px-4">
+<div id="pantalla-register" class="hidden min-h-screen pt-20 flex flex-col items-center justify-center px-4">
   <div class="w-full max-w-md card p-8 flex flex-col gap-6">
     <div class="flex items-center gap-2">
       <svg width="38" height="38" viewBox="0 0 80 80"><circle cx="40" cy="40" r="37" fill="#1a2337" stroke="#e6b800" stroke-width="4"/><polygon points="40,15 55,70 25,70" fill="#e6b800" /></svg>
@@ -131,7 +152,7 @@
 </div>
 
 <!-- ======= 3. DASHBOARD ======= -->
-<div id="pantalla-dashboard" class="hidden min-h-screen flex flex-col items-center px-2 pt-6 pb-5">
+<div id="pantalla-dashboard" class="hidden min-h-screen flex flex-col items-center px-2 pt-24 pb-5">
   <div class="w-full max-w-2xl">
     <div class="flex items-center justify-between mb-2">
       <div class="flex items-center gap-2">
@@ -172,7 +193,7 @@
 </div>
 
 <!-- ======= 4. DETALLE DE VIRTUD ======= -->
-<div id="pantalla-detalle" class="hidden min-h-screen flex flex-col items-center px-3 pt-6 pb-4">
+<div id="pantalla-detalle" class="hidden min-h-screen flex flex-col items-center px-3 pt-24 pb-4">
   <div class="w-full max-w-lg card p-6">
     <div class="flex items-center justify-between mb-1">
       <div class="flex items-center gap-2">
@@ -209,7 +230,7 @@
 </div>
 
 <!-- ======= 5. LOGROS / RETOS ======= -->
-<div id="pantalla-logros" class="hidden min-h-screen flex flex-col items-center px-3 pt-6 pb-4">
+<div id="pantalla-logros" class="hidden min-h-screen flex flex-col items-center px-3 pt-24 pb-4">
   <div class="w-full max-w-lg card p-6">
     <div class="flex items-center gap-3 mb-3">
       <button onclick="goto('dashboard')" class="text-yellow-900 text-sm underline">← Volver</button>
@@ -476,6 +497,7 @@ function share(){ showToast("¡Comparte tu camino de virtud!"); }
 /* ==== ARRANQUE ==== */
 goto("home");
 </script>
+<footer class="text-center text-yellow-300 py-4 serif">Christus Vincit, Christus Regnat, Christus Imperat</footer>
 
 </body>
 </html>
